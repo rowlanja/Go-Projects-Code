@@ -14,15 +14,18 @@ func contains(slice []string, val string) bool {
 	return false
 }
 
+//fucntion finds the lowest common ancestor between two people
 func FindAncestors(relations map[string][]string, child2 string, child1 string) string {
 	fmt.Println("Starting....")
+	if child2 == "" || child1 == "" {
+		return "ERROR, INPUT IS UNMALFORMED"
+	}
 	found := true
 	returned, child1Ancestory, child2Ancestory := "", "", ""
 	for found == true {
 		found = false
 		for key, value := range relations {
 			if contains(value, child1) == true && contains(value, child1) == true {
-
 				return key
 			} else if contains(value, child1) == true {
 				if strings.Contains(child2Ancestory, key) {
