@@ -9,6 +9,7 @@ import (
 func TestFindAncestors(t *testing.T) {
 	// <setup code>
 	testCases := []struct {
+		code      string
 		name      string
 		relations map[string][]string
 		childA    string
@@ -17,13 +18,14 @@ func TestFindAncestors(t *testing.T) {
 	}{
 		//SETTING UP THE TEST FAMILY TREES
 		//SIMPLE FAMILY WITH 3 PEOPLE, A = PARENT OF B,C
-		{"Test1", map[string][]string{
-			"A": []string{"B", "C"},
-			"B": []string{},
-			"C": []string{},
-		}, "B", "C", "A"},
+		{"IMPLE FAMILY WITH 3 PEOPLE, A = PARENT OF B,C",
+			"Test1", map[string][]string{
+				"A": []string{"B", "C"},
+				"B": []string{},
+				"C": []string{},
+			}, "B", "C", "A"},
 		//LARGER FAMILY
-		{"Test2", map[string][]string{
+		{"LARGER FAMILY", "Test2", map[string][]string{
 			"A": []string{"B", "C"},
 			"H": []string{},
 			"C": []string{"E", "F"},
@@ -32,13 +34,13 @@ func TestFindAncestors(t *testing.T) {
 			"F": []string{},
 		}, "G", "F", "C"},
 		//3 PEOPLE WITHOUT RELATION
-		{"Test3", map[string][]string{
+		{"3 PEOPLE WITHOUT RELATION", "Test3", map[string][]string{
 			"A": []string{},
 			"B": []string{},
 			"C": []string{},
 		}, "B", "C", ""},
 		//VERY LOB SIDED TREE
-		{"Test4", map[string][]string{
+		{"VERY LOB SIDED TREE", "Test4", map[string][]string{
 			"A": []string{"B", "C"},
 			"B": []string{},
 			"C": []string{"D"},
@@ -52,7 +54,7 @@ func TestFindAncestors(t *testing.T) {
 	}
 
 	for i, tc := range testCases {
-		fmt.Printf("Test %d Children : %s %s | Parent : %s ", i, tc.childA, tc.childB, tc.ancestor)
+		fmt.Printf("Test %d \nTest is : %s Children : %s %s | Parent : %s ", i, tc.code, tc.childA, tc.childB, tc.ancestor)
 		t.Run(tc.name, func(t *testing.T) {
 			parent := FindAncestors(tc.relations, tc.childA, tc.childB)
 			if parent != tc.ancestor {
